@@ -1,0 +1,748 @@
+\chapter{Integration}
+\section{Big Ideas:}
+First fundamental theorem of calculus:
+
+$\int = $ accumulated rate of change of function $f$ from its rate of change
+of $f'$.
+
+Historically, Riemann (who lived in the 19$^{th}$ century) formalized calculus,
+and was generalized by Lebesgue (late 19${th}$ century). The main difference
+between the two is that in a Riemann construction, one creates a series of
+vertical rectangles under a curve and sums their areas where as Lebesgue
+constructs the rectangles and counts how many there are of particular heights.
+
+\section{Techniques}
+\begin{enumerate}
+  \item Inspection
+  \item Substitution
+  \item Partial integration
+  \item Integration of rational functions by expansion of partial fractions)
+\end{enumerate}
+
+\section{Riemann Sums}
+Riemann sums follow an algorithm that works as follows:
+\begin{enumerate}
+  \item Subdivide the domain of the function (between points $a$ and $b$) into
+  equal parts.
+  \item Evaluate the function at the \emph{left} of each part, and draw a
+  rectangle to the next part.
+  \item Sum each rectangle.
+\end{enumerate}
+\begin{align}
+  f(a)\left(\frac{b-a}{2}\right) + f(x_1)\left(\frac{b-a}{2}\right) & \leq \quad
+    \text{area under the curve}
+\end{align}
+Because \emph{left hand} Riemann sums are generally too small, we can take
+\emph{right hand} Riemann sums:
+\begin{align}
+  f(x_1)\left(\frac{b-a}{2}\right) + f(b)\left(\frac{b-a}{2}\right) & \geq \quad
+    \text{area under the curve}
+\end{align}
+However, this will be an \emph{over estimate}. How can we improve accuracy? We
+can divide the interval by increasing the number of parts. The width of each
+rectangle will get thinner, but the error also decreases.
+\begin{align}
+  a_{n} = x < x_1 < \ldots < x_n = b
+\end{align}
+
+\noindent There is still a further optimisation to be made... Because that LH
+sums are generally too small, and RH sums are generally too large:
+\begin{align}
+  f(x_0) \frac{b-a}{n} + \ldots + f(x_{n-1})\frac{b-a}{n}
+  \quad \leq \quad A(f) \quad \leq \quad
+  f(x_1) \frac{b-a}{n} + \ldots + f(x_n) \frac{b-a}{n}
+\end{align}
+(where $A$ is the actual area)... But, if we take all the over estimates and all
+the under estimates:
+\begin{align}
+  m_1 \frac{b-a}{n} + \ldots +
+    m_i \frac{b-a}{n} + \ldots +
+      m_n \frac{b-a}{n} + \ldots
+      &= \sum_{i=1}^{n} m_i \frac{b-a}{n} \\
+  M_1 \frac{b-a}{n} + \ldots +
+    M_i \frac{b-a}{n} + \ldots +
+      M_n \frac{b-a}{n} + \ldots
+      &= \sum_{i=1}^{n} M_i \frac{b-a}{n}
+\end{align}
+We expect:
+\begin{align}
+  \sum_{i=1}^{n} m_i \frac{b-a}{n}
+    \leq A(f) \leq
+      \sum_{i=1}^{n} M_i \frac{b-a}{n}
+\end{align}
+If $f$ is well behaved, and we take the limit of function:
+\begin{align}
+  \int_a^b f(x) dx &= \lim_{n \to \infty} \sum_{i=1}^n m_i\frac{b-a}{n} \\
+                   &= \lim_{n \to \infty} \sum_{i=1}^n M_i\frac{b-a}{n}
+\end{align}
+
+\subsection{Parts of the notation:}
+The $\int$ symbol is actually a letter S that has been stretched vertically. \\
+$\int_a^b f(x) dx$ means we sum all the parts from $a$ to $b$ (travelling left
+to right along the $x$ axis) of some function. The $dx$ means we are working
+with respect to the $x$ axis.
+
+If $a<b$, $\int_b^a f(x) dx) = - \int_a^b f(x) dx$... we have to subtract area
+underneath curves... This is the \emph{signed} area.
+
+
+\section{Example of Integration}
+\begin{align}
+\int_{0}^{1} \frac{1}{4+x^2} dx
+  &= ... \\
+\left(\arctan(x)\right)' &= \frac{1}{1+x^2}  \\
+\left(\arctan\left(\frac{x}{2}\right)\right)' &= \frac{1}{1+(\frac{x}{2})^2}\cdot\frac{1}{2} \\
+  &= \frac{2}{4+x^2} \\
+\left(\frac{1}{2}\arctan\left(\frac{x}{2}\right)\right)' &= \frac{1}{4+x^2} \\
+\intertext{So:}
+\int_{0}^{1} \frac{1}{4+x^2} dx
+  &= \frac{1}{2}\arctan\left(\frac{x}{2}\right)|_0^1 \\
+  &= \frac{1}{2}\arctan(\frac{1}{2}) - \frac{1}{2}\arctan(0) \\
+  &= \frac{1}{2}\arctan(\frac{1}{2})
+\end{align}
+
+\section{Properties of Integration}
+Additive
+$\int_a^b f(x) dx = \int_a^c f(x) dx + \int_c^b f(x) dx$
+
+$\int_a^b (f(x)+g(x)) dx = \int_a^b f(x) dx + \int_a^b g(x) dx$
+
+If $f$ is an even function AND $a > 0$
+$\int_{-a}^{a} f(x) dx = 2\int_0^a f(x) dx$
+
+If $f$ is an odd function AND $a > 0$
+$\int_{-a}^{a} f(x) dx = 0$
+
+Factors come out nicely
+$\int_a^b k f(x) dx = k \int_a^b f(x) dx$
+
+
+Squeeze theorem
+If $m \leq f(x) \leq M \forall a \leq x \leq b$
+
+$m(b-a) \leq \int_a^b f(x) dx \leq M(b-a)$
+
+If $f(x) \leq g(x) \forall a \leq x \leq b$
+then
+$\int_a^b f(x) dx \leq \int_a^b g(x) dx$
+
+Example:
+1)
+\begin{align}
+\int_0^1 (1 + x + x^2) dx
+  &= \int_0^1 (1) + \int_0^1 (x) + \int_0^1 (x^2) \\
+  &= x|_0^1 + \frac{x^2}{x}|_0^1 + \frac{x^3}{3}|_0^1 \\
+  &= (1-) + (\frac{1}{2}-0) + (\frac{1}{3}-0) \\
+  &= 1+\frac{1}{2} +\frac{1}{3}
+\end{align}
+2)
+\begin{align}
+\int_{-\pi}^{3\pi} 2\sin(x) dx &= 2 \int_{-\pi}{3\pi}\sin(x)dx
+ &= 2\left(\int_{-\pi}^{3\pi} \sin(x) dx + \int_{-\pi}^{3\pi} \sin(x) dx \right) \\
+ &= 2\left(0 + (-\cos(x))|_{-\pi}^{3\pi}\right) \\
+ &= 0
+\end{align}
+3)
+\begin{align}
+  \int_{-42}^{42} x^{41}e^-{x^2} dx &= 0 dx \\
+  \intertext{Because odd function...}
+  f(x) &= x^41 e^{x^2} \\
+  f(-x) &= (-x)^41 e^(- -x^2) \\
+  &= -x^41 e^{-x^2} \\
+  &= -f(x)
+\end{align}
+4)
+
+\begin{align}
+  \int_0^\pi \sin^2(x) dx &= (\sin^3 x)' \\
+    &= 3 \sin^x \cos x \\
+  \intertext{know that}
+  \cos(2x) &= \cos^2(x) - \sin^2(x) \\
+    &= 1 - 2\sin^2(x) \\
+  \intertext{hence}
+  \sin^2(x) &= \frac{1 - \cos(2x)}{2} \\
+  \intertext{so}
+  \int_0^\pi \sin^2(x) dx &= \int_0^\pi \frac{1- \cos(2x)}{2} dx \\
+    %&= \frac{1}{2} \int_0^\pi (1 - \cos(2x)) dx \\
+    %&= \frac{1}{2} \left( \int_0^\pi dx - \int_0^\pi \cos(2x) dx \right) \\
+    %&= \frac{1}{2} \left( \pi - \frac{1}{2}\sin ... curse you frank, don't cover the slides with hands and then move them away! \right)
+    &= \frac{1}{2}
+\end{align}
+5)
+
+%\begin{align}
+  %\int_0^\sqrt{\pi} \sin(x^2) dx &= ...
+  %\intertext{we know that }
+  %\sin(x^2) \leq 1
+  %\intertext{follows}
+  %\int_0^\sqrt{\pi} \sin(x^2) dx &\leq \int_0^\sqrt{\pi} dx = \sqrt{\pi}
+%\end{align}
+
+%\graphturbate[Plot[Sin[x^2], {x, 0, Sqrt[Pi]}] ]
+
+
+\section{Calculate average of continuous quantity}
+
+The average value ($\overline{g}$) of a function $f$ can be calculated as
+follows:
+\begin{align}
+  \overline{g} &= \frac{1}{b-a} \sum_{k=0}^{n-1} g(t_k) \Delta t \\
+  &\to  \frac{1}{b-a} \int_a^b g(t)dt
+  \intertext{so:}
+  \overline{g} &= \frac{1}{b-a} \int_a^b g(t) dt
+\end{align}
+
+\subsection{Example - Calculate average temperature of cooling bar of metal}
+Suppose a bar of metal is cooling from $1000\deg$ C to room temperature $20\deg$
+C. The temperature is given by:
+$T(t) = 20 + 980e^{-t/10}$.
+
+This function comes from\footnote{they are not normally this pleasant}
+\begin{align}
+  T(0) &= 20 + 980 = 1000 \\
+  \lim{t \to \infty} T(t) &= 20
+\end{align}
+
+This is the unique solution of:
+\begin{align}
+  \frac{dT}{dt} &= -\frac{1}{10}(T-20), T(0) = 1000 \\
+\end{align}
+and is an example of a first order differential equation.
+
+If you differentiate you get
+\begin{align}
+  \frac{d}{dk} e^{kx} &= ke^{kx} \\
+  \frac{df}{dx} &= kf
+\end{align}
+
+Calculate the average temperature of the bar after one hour (t=60):
+\begin{align}
+  T(t) &= 20 + 980e^{-t/10} \\
+  T(60) &\approx 22.4\deg \\
+\end{align}
+
+Calculate the average temperature over the first 60 minutes:
+\begin{align}
+  \overline{T}
+  &= \frac{1}{60} \int_0^60 T(t) dt \\
+  &= \frac{1}{60} \int_0^60 (20+980e^{-t/10}) dt \\
+  &= \frac{1}{60} \left(\int_0^60 20 dt + 980 \int_0^60 e^{-t/10} dt \right) \\
+  &= \frac{1}{60} \left( 20t|_0^60 + 980\cdot(-10e^{-t/10})\rvert_0^60 \right) \\
+  &= 20 + \frac{980}{6}(e^6 -1) \\
+  &= 20 + \frac{490}{3}(1 - e^-6) \\
+  &\approx 182.9 \deg C
+\end{align}
+
+Calculate volume of sphere of radius R
+(note: $\int\int\int dxdyzdz = V$ but we won't need triple integration for this
+example thankfully)
+
+
+\section{Another section}
+
+FFT (first fundamental theorem) of calculus requires anti-derivatives. Given
+$f(x)$ with anti-derivative $F_1(x)$:, $F_1'(x) = f(x)$ on an interval, the
+function:
+\begin{align}
+  F_2(x) &= F_1(x) + C \\
+  F_2'(x) &= F_1'(x) = f(x)
+\end{align}
+We always have infinitely many anti-derivatives.\\
+\\
+Conversely, if $F_1$ and $F_2$ are anti-derivatives of $f$, then
+\begin{align}
+  F_1'(x) &= f(x) \\
+  F_2'(x) &= f(x)
+  \intertext{so}
+  F_1'(x) - F_2'(x) &= 0 \\
+  (F_1 - F_2)'(x) &= 0 \forall x \in (a,b) \\
+  \intertext{hence}
+  (F_1 - F_2) &= k \\
+  F_2(x) &= F_1(x) -k \\
+  \therefore (F(x) )' &= f(x) = F'(x)
+\end{align}
+Since the FFT requires anti-derivatives, with a new notation. The
+anti-derivatives of a function $f$ are denoted by
+\begin{align}
+  \int f(x) dx &= F(x) + C
+\end{align}
+(an integral without boundaries). The $+C$ constant accounts for vertical shift
+of the original function.
+
+$\int_a^b f(x) dx :$ is the \emph{definite integral} - real numbers \\
+\\
+$\int f(x) dx :$ is the \emph{indefinite integral} - family of functions where
+each function is given by a different $C$ constant.
+
+There are infinitely many anti-derivatives, and it does not matter which
+anti-derivative we take.
+
+$\int_a^b f(x) dx = F_1(b) - F_1(a)$
+
+Take $F_2$...
+
+$F_2(x) = F_1(x) + C_2$
+
+Hence
+
+\begin{align}
+  F_2(b) - F_2(a) &= \left(F_1(b) + C_2\right) - \left(F_1(a) + C_2\right) \\
+  &= F_1(b) - F_1(a)
+\end{align}
+
+\section{Some standard integrals:}
+
+\begin{align}
+  \int x^n dx &= \frac{x^{n+1}}{n+1} + C | n \neq -1 \\
+  \int \frac{1}{x} dx &= \log|x| + C | x \neq 0 \\
+  \int \frac{1}{1+x^2} dx &= \arctan(x) + C \\
+  \int \frac{1}{\sqrt{1-x^2}} dx &= \arcsin(x) + C \\
+  \int f(x) dx &= F(x) + C \\
+  \intertext{To verify, calculate $F'(x)$, should give $f(x)$. \emph{always}
+  remember the integration constant!}
+\end{align}
+
+\section{Integration Techniques}
+\subsection{Inspection using FFT}
+\subsection{Substitution}
+Uses chain rule from differentiation.
+
+\begin{align}
+  (g \circ f)'(x) &= g'(f(x))\cdot f'(x) \\
+  \int g'(f(x))\cdot f'(x) dx &= \int (g \circ f)'(x) dx \\
+  &= (g \circ f)(x) +C\\
+  &= g(f(x)) +C
+\end{align}
+That is,
+\begin{align}
+  \int h(f(x))f'(x) dx &= \int H'(f(x))f'(x) dx \\
+  &= \int (H \circ f)'(x) dx &= \\
+  &= H(f(x)) +C
+  \intertext{If}
+  H'(x) &= h(x)
+\end{align}
+You only need an antiderivative of the outer function, in this case,
+\begin{align}
+  \int h(y) dy &= H(y) + C_1 \\
+  \intertext{Let}
+  y &= f(x)
+  \intertext{Formally}
+  \int h(f(x))f'(x) dx &= \int h(y) dy + \quad \text{use $y=f(x)$} \\
+  \frac{dy}{dx} = f'(x) &= dy = f'(x) dx
+\end{align}
+
+\subsubsection{Example}
+\begin{align}
+  \int \frac{x}{1+x^2} dx &
+  \intertext{Let}
+  y &= x^2 \\
+  dy &= 2x dx
+  \intertext{st}
+  \int \frac{x}{1+x^2} dx &= \frac{1}{2} \int \frac{dy}{1+y} \\
+  &= \frac{1}{2} \log|1+y| + C \\
+  &= \frac{1}{2} \log|1+x^2| +C \\
+  &= \frac{1}{2} \log(1+x^2) +C
+\end{align}
+
+\subsubsection{Example 2}
+\begin{align}
+  \int \sin(x)\cos(x) dx &
+  \intertext{Let}
+  y &= \sin(x) \\
+  dy &= \cos(x) dx \\
+  \intertext{st}
+  \int \sin(x)\cos(x) dx &= \int y dy \\
+  &= \frac{1}{2} y^2 +C \\
+  &= \frac{1}{2} \sin^2(x) +C \\
+\end{align}
+Alternatively
+
+\begin{align}
+  \int \sin(x)\cos(x) dx &= \frac{1}{2} \int \sin(2x) dx \\
+  &= \frac{1}{2} \cdot \frac{1}{2} -\cos(2x) + C_2 \\
+  &= -\frac{1}{4} \cos(2x) + C_2
+\end{align}
+
+%TODO WTF? how?
+
+Remark:
+\begin{align}
+  \int f(y) dy & \int f(g(x)) g'(x) dx \\
+  \sum f(y_i)(y_1 - y_i) &\\
+  \intertext{If}
+  y &= g(x) \\
+  y_{i+1}-y_i = g(x+{i+1}) - g(x_i) &\approx g'(x)(x_{i+1}-x_i) \\
+  \intertext{so}
+  dy &= g'(x) dx
+\end{align}
+
+\subsubsection{Another example}
+Anti-derivatives of $\frac{\log(x)}{x}$.
+\begin{align}
+  \int \frac{\log x}{x} dx &
+  y &= \log{x} \\
+  dy &= \frac{1}{x} dx \\
+  \int \frac{\log x}{x} dx &= \int y dy \\
+  &= \frac{1}{2} y^2 + C \\
+  &= \frac{1}{2} (\log x)^2 +C \\
+  \intertext{Check}
+  (\frac{1}{2}(\log x)^2)' &= \frac{1}{2} 2 \log x \frac{1}{x} \\
+  &= \log x \frac{1}{x}
+\end{align}
+
+\begin{align}
+  \int \frac{1}{e^x +1} dx &
+  \intertext{let}
+  y &= e^x
+  dy &= e^x dx
+  \intertext{st}
+  \int \frac{1}{e^x +1} dx &= \int \frac{1+e^x-e^x}{e^x+1} dx \\
+  &= \int (1 - \frac{e^x}{e^x+1}) dx \\
+  &= x - \log (e^x + 1) + C
+\end{align}
+
+\section{Substitution}
+(Chain rule)
+\begin{enumerate}
+  \item $f$ needs to be continuous! (piecewise continuous is OK)
+\begin{align}
+  \int f(y(x))y'(x) dx &= \int f(y) dy \\
+  y &= y(x) \\
+  dy &= y'(x) dx \\
+  \int f(y(x))y'(x) dx &= \int_{y(a)}^{y(b)} f(y) dy
+\end{align}
+  \item $y'(x)$ also continuous
+  \item ($y(x)$ is continuously differentiable) \\
+  $\to$ $y(x)$ is continuous \\
+  $\to$ $f \circ y$ is continuous
+\end{enumerate}
+
+\subsection{Examples}
+\begin{align}
+  \int_0^{\pi/2} \cos^3u\sin^4u du & \\
+  \intertext{Let}
+  \sin u &= y \\
+  \intertext{Such that}
+  \cos u du &= dy \\
+  \int_0^{\pi/2} \cos^3u\sin^4u du &= \int_0^{\pi/2} \cos u (1 - \sin^2 u)\sin^4u du \\
+  &= \int_0^{\pi/2} \cos u \sin^4 u du - \int_0^{\pi/2}\cos u \sin^6 u du \\
+  &= \int_0^{\sin(\pi/2)} y^4 dy - \int_0^{\sin(\pi/2)} y^6 dy \\
+  &= \int_0^{1} y^4 dy - \int_0^{1} y^6 dy \\
+  &= \frac{y^5}{5}|_0^{1} -\frac{y^7}{7}|_0^7 = \frac{1}{5} - \frac{1}{7}
+  &= \frac{2}{35} \\
+\end{align}
+
+\section{By Parts}
+(Product Rule)
+\begin{align}
+  (u(x)v(x) )' &= u'(x)v(x) + u(x)v'(x) \\
+  \int_a^b (u(x)v(x))' dx &= \int_a^b u'(x)v(x) dx + \int_a^b u(x)v'(x) dx \\
+  u(x)v(x)|_a^b &= \ldots
+  \intertext{Usually written as}
+  \int_a^b u'(x)v(x) dx &= (u(b)v(b) - u(a)v(a)) - \int_a^b u(x)v'(x) dx \\
+  \intertext{sometimes}
+  u &= u(x) \\
+  du &= u'(x)dx \\
+  \int_a^b v du &= uv|_a^b - \int_a^b u dv
+\end{align}
+
+\subsection{Example 1 - Int By Parts}
+\begin{align}
+  \int_0^{\pi/2} x\sin(x) dx & \\
+  &= \int_0^{\pi/2} x d(-\cos x) \\
+  &= -x \cos(x)|_0^{\pi/2} - \int_0^{\pi/2}(-\cos x) dx \\
+  &= 0 + \int_0^{\pi/2} \cos x dx \\
+  &= \Eval{\sin x}{0}{\pi/2} \\
+  &= 1
+\end{align}
+
+\subsection{Example 2 - Int By Parts}
+\begin{align}
+  \int_0^{1} x\arctan x dx & \\
+  &= \int_0^1 (\frac{1}{2}x^2)' \arctan x dx \\
+  \intertext{Let}
+  u(x) &= \arctan x \\
+  u'(x) &= \frac{1}{1+x^2} \\
+  v(x) &= \frac{1}{2}x^2 \\
+  v'(x) &= x
+  \intertext{Such that}
+  \int_0^{1} x\arctan x dx \\
+  &= \Eval{\frac{1}{2}x^2 \arctan x}{0}{1} - \int_0^1 \frac{1}{2}x^2 \frac{1}{1+x^2} dx \\
+  &= \frac{1}{2}\arctan x 1 - 0 - \frac{1}{2}\int_0^1 \frac{x^2}{1+x^2} dx \\
+  &= \frac{\pi}{8} -\frac{1}{2}\int_0^1 \frac{x^2}{1+x^2} dx \\
+  &= \int_0^1 \frac{x^2}{1+x^2} dx \\
+  &= \int_0^1 \frac{x^2 +1 -1}{1+x^2} dx \\
+  &= \int_0^1 \left(1 - \frac{1}{1+x^2}\right) dx \\
+  &= 1- \Eval{\arctan x}{0}{1} \\
+  &= 1 - \left(\arctan1 - \arctan0\right) \\
+  &= 1 - \frac{\pi}{4}
+  \intertext{Hence}
+  \int_0^1 x \arctan x dx &= \frac{\pi}{8} - \frac{1}{2}(1-\frac{\pi}{4}) \\
+  &= \frac{\pi}{4}- \frac{1}{2}
+\end{align}
+
+\subsection{Example 3 - Int By Parts}
+\begin{align}
+  \int_0^1 1 \arctan x dx &
+  \intertext{Let}
+  u(x) &=\arctan x \\
+  u'(x) &= \frac{1}{1+x^2} \\
+  v(x) &= x \\
+  v'(x) &= 1
+  \intertext{Such that}
+  \int_0^1 1 \arctan x dx &= \Eval{x \arctan x}{0}{1} - \int_0^1\frac{x}{1+x^2} dx \\
+  &= \frac{\pi}{4} - \int_0^1 \frac{x}{1+x^2} dx \\
+  \intertext{Use substitution, let}
+  y&= x^2 \\
+  dy&= 2xdx \\
+  \intertext{such that}
+  \frac{\pi}{4} - \int_0^1 \frac{x}{1+x^2} dx \\
+  &= \frac{\pi}{4} - \frac{1}{2} \int_0^1 \frac{1}{1+y} dy \\
+  &= \frac{\pi}{4} - \Eval{\frac{1}{2} \ln |1+y|}{0}{1} \\
+  &= \frac{\pi}{4} - \frac{1}{2} \ln2 + \frac{1}{2} \ln 1 \\
+  &= \frac{\pi}{4} - \frac{1}{2} \ln 2
+\end{align}
+
+\subsection{Example 4 - Int By Parts}
+\begin{align}
+  \int_1^e 1\cdot\ln x dx &
+  &= \text{left as exercise}
+\end{align}
+
+\subsection{Example 5 - Int By Parts}
+\begin{align}
+  \int e^x \sin x dx &
+  &= \int \sin(x) d(e^x) \\
+  &= \sin(x)e^x - \int e^x d(\sin x) \\
+  &= \sin(x)e^x - \int e^x \cos x dx \\
+  &= \sin(x)e^x - \int \cos x d(e^x) \\
+  &= \sin(x)e^x - \left(e^x\cos x -\int e^x d(\cos x) \right) \\
+  &= (\sin(x) - \cos(x))e^x - \int \sin(x)e^x dx \\
+  \intertext{Move the integral to the other side}
+  2 \int e^x \sin(x) dx &= \left( \sin x - \cos x \right)e^x \\
+  \int e^x \sin(x) dx &= \frac{\left( \sin x - \cos x \right)e^x}{2} + C
+\end{align}
+
+\subsection{Example 6 - Int By Parts}
+\begin{align}
+  \int \sin^2 x dx &
+  &= \int \sin x \sin x dx \\
+  &= \int \sin x d(-\cos x) \\
+  &= -\sin x \cos x - \int(-\cos x) d(\sin x) \\
+  &= -\sin x \cos x + \int(\cos^2x) dx \\
+  &= -\sin x \cos x + \int (1-\sin^2x) dx \\
+  &= x- \sin x \cos x - \int \sin^2 x dx \\
+  2 \int \sin^2 x dx &= x - \sin x \cos x \\
+  \int \sin^2 x dx &= \frac{x - \sin x \cos x}{2} + C \\
+  &= \frac{1}{2}x - \frac{1}{4}\sin(2x) + C
+\end{align}
+
+\section{Second Fundamental Theorem of Calculus}
+Let $f$ be a continuous function on $[a,b]$. The function \\
+$F(x) = \int_a^x f(t) dt$ \\
+for $a \leq b$. \\
+$F$ is differentiable, and $F'(x) = f(x)$. \\
+\ldots \\
+\begin{align}
+  \frac{1}{h}(F(x+h) - F(x))
+  &= \frac{1}{h} \int_a^{x+h} f(t) dt - \int_a^{x} f(t) dt \\
+  &= \frac{1}{h} \int_a^{x+h} f(t) dt \stackrel{h \to 0}{\to} f(x)
+\end{align}
+
+\subsection{Example 1 - SFTC}
+\begin{align}
+  \intertext{If}
+  F(x) &= \int_1^x \ln t dt \\
+  \intertext{Find}
+  \frac{d}{dx} F(x^2) & \\
+  F(x^2) &= \int_1^{x^2} \ln t dt \\
+  \intertext{We know that $F'(x)=\ln x$}
+  F(x^2) &= F(s(x)), \quad \text{with} \quad s(x) = x^2
+  \intertext{No apply chain rule}
+  \frac{d}{dx}(F(s(x))) &= F'(s(x))s'(x) \\
+  &= F'(x^2) 2x \\
+  &= \ln(x^2) 2x \\
+  &= 4x \ln x
+\end{align}
+
+\subsection{Example 2 - SFTC}
+\begin{align}
+  \int \frac{1}{x^2 +6x +14} dx &
+  \Delta &= 36 -4*14 < 0 \\
+  \intertext{therefor no real roots. This means we cannot factorize this
+  quadratic into two llinear factors. To handle this, we use completing the
+  square.}
+  \text{"completing the square"} \quad \leftrightarrow \quad 1+u^2 \\
+  x^2 +6x +14 &= (x+3)^2 +5 \\
+  &= 5\left(1 + \frac{x+3}{\sqrt{5}}^2\right) \\
+  &= \frac{1}{5} \int \frac{1}{\frac{x+3}{\sqrt{5}}^2} dx
+  &= \frac{1}{\sqrt{5}} \int\frac{1}{1+u^2} du
+  \intertext{Let}
+  u&= \frac{x+3}{\sqrt{5}} \\
+  du &= \frac{1}{\sqrt{5}} dx \\
+  \frac{1}{\sqrt{5}} \int\frac{1}{1+u^2} du
+  &= \frac{1}{\sqrt{5}} \arctan u +C
+\end{align}
+
+\subsection{Example 3 - SFTC}
+This is the second example that utilises completing the square.
+\begin{align}
+  \int \frac{3}{\sqrt{2x-x^2}} dx & \\
+  2x-x^2 &= -(x -1)^2 +1 \\
+  &= -(x^2 -2x +1) +1 \\
+  &= -x^2 +2x \\
+  3 \int \frac{1}{\sqrt{1- (x-x^2)}} dx & \\
+  \intertext{Let}
+  v &= x-1 \\
+  dv &= dx \\
+  \intertext{Such that}
+  3 \int \frac{1}{\sqrt{1- (x-x^2)}} dx & \\
+    &= 3 \int \frac{1}{\sqrt{1-v^2}} dv \\
+    &= 3 \arcsin v + C \\
+    &= 3 \arcsin(x-1) + C
+\end{align}
+
+\subsection{Example 1 - Geometric Applications}
+Finding area of ellipse (pretending we do not know the formula). Background:
+the relation for an ellipse is given by: \\
+\begin{align}
+  \frac{x^2}{a^2} + \frac{y^2}{b^2} &= 1 \quad | \quad (a,b > 0) \\
+  \intertext{Rearranging}
+  y^2 &= b^2\left(1 - \frac{x^2}{a^2}\right) \\
+  y &= b \sqrt{1 - \frac{x^2}{a^2}} \\
+  \intertext{Let}
+  A &= \quad \text{area} \\
+  \intertext{Taking a quarter of the ellipse...}
+    &= 4 b \int_0^a \sqrt{1- \frac{x^2}{a^2}} dx
+  \intertext{If}
+  x &= a \sin \theta \\
+  dx &= a \cos \theta d\theta
+  \intertext{such that}
+  4 b \int_0^a \sqrt{1- \frac{x^2}{a^2}} dx
+  &= 4ba \int_0^a \sqrt{1 - \sin^2 \theta} \cos \theta d\theta \\
+  &= 4ba \int_0^{\pi/2} \sqrt{1 - \sin^2 \theta} \cos \theta d\theta
+  &= 4ba \int_0^{\pi/2} \left| \cos\theta \right| \cos \theta d\theta \\
+  &= 4ba \int_0^{\pi/2} \cos^2\theta d\theta \\
+  \intertext{Solve by integration by parts}
+  &= 4ba \frac{\pi}{4} \\
+  &= \pi ab
+\end{align}
+
+\subsection{Example 2 - Geometric Applications}
+Calculate the area of a circular segment.
+\begin{align}
+  \intertext{Let}
+  A &= \quad \text{area}
+  \intertext{Split area into two parts, a right angle triangle, and the derpy
+  bit. The relation for a circle is given by}
+  x^2 + y^2 &= R^2 \\
+  y &= \sqrt{R^2 - x^2} \\
+  \intertext{So}
+  A &= \text{triangle} + \text{derp} \\
+  &= \int_0^{R\cos\theta} \ldots + \int_{R\cos\theta}^{R} \ldots \\
+  &= \int_0^{R\cos\theta} \ldots + \frac{1}{2}R^2\cos\theta\sin\theta \\
+  \intertext{Substitute}
+  x &= R \sin\phi \\
+  \intertext{or}
+  x &= R \cos\psi \\
+  \intertext{$\cos$ is going to be more useful}
+  dx &= -R \sin\psi d\psi \\
+  \intertext{So derpy bit becomes}
+  -R\int_{\theta}^{0} \sqrt{R^2-R^2\cos\psi}\sin\psi d\psi &\\
+  &= R\int_{0}^{\theta} \left| \sin \psi \right| \sin \psi d \psi \\
+  &= R^2 \int_{0}^{\theta} \sin^2 \psi d\psi \\
+  &= R^2 \int_0^\theta \left(\frac{1-\cos 2\psi}{2}\right) d\psi \\
+  &= R^2 \left \int_0^\theta \frac{1}{2}\d\psi - \frac{1}{2} \int_0^\theta \cos2\psi d\psi \right) \\
+  &= R^2 \left(\Eval{\frac{1}{2}\theta - \frac{1}{4} \sin2\psi}{0}{0} \right)
+  \intertext{Smoosh together both parts}
+  A &= \frac{1}{2}R^2\cos\theta\sin\theta + \frac{1}{2}R^2\theta -\frac{1}{4}R^2\sin^2\theta
+\end{align}
+
+\subsection{Example 3 - Geometric Applications}
+This is a common exam question.
+
+Find the area enclosed by graph of function $f(x) = 1+\ln x$ where horizontal
+line $y=1$ and vertical lines $x=1$ and $x = 5$.
+
+\begin{align}
+  \intertext{Let}
+  A &= \text{area desired} \\
+    &= \text{total area under curve} - \text{area under $y=1$} \\
+    &= \int_1^5 (1 + \ln x) dx - \int_1^5 1 dx \\
+    &= \int_1^5 (1 + \ln x -1) dx \\
+  \intertext{Integrate by parts}
+    &= \int_1^5 1 \ln x dx  \\
+    &= \Eval{x \ln x}{1}{5} - \int_1^5 x d(\ln x) \\
+    &= 5 \ln 5 - \int_1^5 dx \\
+    &= 5 \ln 5 - 4
+\end{align}
+
+More generally - you want to find the total area beneath the target function
+and subtract the lower bounding function to get the target area.
+
+\subsection{Example 4 - Integrating Additional Rational Functions}
+Partial fractions.
+
+\begin{align}
+  \int \frac{1}{x^2 -7x +10} dx &
+  \intertext{Completing the square, gives a negative number...}
+  x^2 -7x +10 &= (x-\frac{7}{2})^2 - \frac{49}{2} +10 \\
+  \intertext{We can rewrite it as}
+  \frac{1}{(x-2)(x-5)}dx &
+  &= \frac{A}{x-2} + \frac{B}{x-5} \\
+  &= \frac{A(x-5) + B(x-2)}{(x-2)(x-5)} \\
+  \intertext{So find (must hold for ALL x)}
+  A(x-5) + B(x-2) &= 1 \\
+  (A+B)x -(5A +2B) &= 1 \\
+  \intertext{Create a system of linear equations (to be covered next week)}
+  A+B &= 0 \\
+  5A+2B &= -1 \\
+  \intertext{Simpler way:}
+  x = 2: -&3A = 1 \to A = -\frac{1}{3} \\
+  x = 5:  &3B = 1 \to B = \frac{1}{3} \\
+  \int \frac{1}{(x-2)(x-5)} dx &= \int \frac{-1/3}{x-2} + \frac{1/3}{x-5} dx \\
+  &= -\frac{1}{3} \ln |x-2| + \frac{1}{3}\ln|x-5| +C
+\end{align}
+
+\section{Improper Integrals}
+So far we have been integrating continuous functions on a bounded interval,
+$[a,b]$. For many applications, this is too restrictive. One such example
+might be that the bounds are too restrictive:
+\begin{align}
+  \int_0^{+\infty} \frac{1}{1+x^2} dx & \\
+  &= \lim_{m \to +\infty} \int_0^m \frac{1}{1+x^2} dx \\
+  &= \lim_{m \to +\infty} \Eval{\arctan x}{0}{m} \\
+  &= \lim_{m \to +\infty} \arctan m \\
+  &= \frac{\pi}{2}
+\end{align}
+
+\begin{align}
+  \int_{-\infty}{+\infty} \frac{1}{1+x^2} dx & \\
+  &= \lim_{m \to \infty} \int_{-m}{m} \frac{1}{1+x^2} dx \\
+  &= \lim_{m \to \infty} (\arctan m - \arctan(-m)) \\
+  &= \frac{\pi}{2} - (-\frac{\pi}{2}) \\
+  &= \pi
+\end{align}
+
+Sometimes the end points are not defined:
+\begin{align}
+  \int_0^1 \ln x dx & \\
+  \intertext{This requires integrating from a point arbitrarily close to 0}
+  &= \lim_{\epsilon \to 0} \int_\epsilon^1 \ln x \dx \\
+  &= \lim_{\epsilon \to 0} \left(\Eval{x\ln x}{\epsilon}{1} - \Eval{x}{\epsilon}{1}\right) \\
+  &= \lim_{\epsilon \to 0} \left( -\epsilon \ln \epsilon - 1 + \epsilon) \\
+  &= \lim_{\epsilon \to 0} \epsilon \ln \epsilon \\
+  &= \lim_{\epsilon \to 0} \frac{\ln \epsilon}{\frac{1}{\epsilon}} \\
+  &= \lim_{\epsilon \to 0} \ldots \\
+  &= -\lim_{\epsilon \to 0} \epsilon \\
+  &= 0
+\end{align}
+
+
+Some have no antiderivative:
+\begin{align}
+  \int_0^{\infty} e^{-x^2} dx & \\
+  \intertext{Use a trick (from MATH235) where you calculate the square of the
+  integral.}
+  \int\int e^(-x^2+y^2) dxdy
+\end{align}

@@ -1,0 +1,54 @@
+# Based on template from
+# https://github.com/seanfisk/scons-latex/blob/master/.gitignore
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdy
+
+# Other LaTeX junk.
+*.fls
+
+# AUCTeX
+/auto
+
+# Ignore PDF outputs as well.
+MATH135.pdf
+
+# SCons database.
+.sconsign.dblite
+
+# Ignore rope projects.
+.ropeproject
+
+# pyenv version files.
+.python-version
+
+# my additions
+out/*
